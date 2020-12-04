@@ -27,7 +27,7 @@ def get_feature_vector_from_mfcc(file_path: str, flatten: bool, mfcc_len: int = 
     return mel_coefficients
 
 def get_data(data_path: str, flatten: bool = True, mfcc_len: int = 39,
-             class_labels: Tuple = ("RV", "RV2", "RV3", "RV4")) -> \
+             class_labels: Tuple = ("RV", "RV2", "RV3", "RV4", "BH")) -> \
         Tuple[np.ndarray, np.ndarray]:
 
     data = []

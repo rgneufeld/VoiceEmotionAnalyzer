@@ -6,7 +6,10 @@ import sys
 from typing import Tuple
 
 import numpy
-from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+import seaborn as sns
+from matplotlib import pyplot as plt
 
 
 class Model(object):
@@ -151,5 +154,12 @@ class Model(object):
         print(predictions)
         print('Accuracy:%.3f\n' % accuracy_score(y_pred=predictions,
                                                  y_true=y_test))
-        print('Confusion matrix:', confusion_matrix(y_pred=predictions,
-                                                    y_true=y_test))
+        cf_matrix = confusion_matrix(y_pred=predictions, y_true=y_test)
+
+        print('Confusion matrix:\n', confusion_matrix(y_pred=predictions,
+                                                      y_true=y_test))
+        target_names = ['Angry', 'Disgusted', 'Fearful', 'Happy', 'Neutral', 'Sad', 'Surprised']
+        plt.figure(figsize=(7,8))
+        sns.heatmap(cf_matrix, annot=True, fmt='d', yticklabels=target_names, xticklabels=target_names)
+        plt.show()
+        print(classification_report(y_true=y_test, y_pred=predictions, target_names=target_names))
